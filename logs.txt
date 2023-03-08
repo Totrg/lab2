@@ -1,0 +1,96 @@
+sudo apt install git
+
+cd ~/gh
+
+//////////////////////////////////////
+
+PART1
+
+//////////////////////////////////////
+
+git init .			//Initialization of rep
+
+git >> README.md		//README.md file added to the current folder
+
+git add README.md		//set git index to a file
+
+git commit -m "Commit1"		//commit with message
+
+git remote add origin https://github.com/Totrg/lab2
+
+git push --set-upstream origin master	//from git push usage CTRLC-CTRLV
+
+cat > hello_world.cpp			//creating cpp file
+
+git add hello_world.cpp
+
+git commit -m "bcs helloworld added"
+
+git commit -a -m "helloworld modified"	//another way for git add
+
+git push origin master
+
+//////////////////////////////////////
+
+PART2
+
+//////////////////////////////////////
+
+git checkout -b patch1 			//creating and switching to the branch patch1
+
+git commit -am "helloworld modified 2 (namespace deleted)"
+
+git push origin patch1
+
+git commit -am "helloworld modified 3 (comments added)"
+
+git push origin patch1
+
+git checkout master
+
+git merge origin/patch1
+
+git pull origin master			//pull
+
+git log
+
+git branch -d patch1			//deleting patch1 (local)
+
+git push origin --delete patch1		//deleting patch1 (remoted)
+
+//////////////////////////////////////
+
+PART3
+
+//////////////////////////////////////
+
+git checkout -b patch2
+
+sudo apt install clang-format
+
+clang-format -style=Mozilla -i hello_world.cpp	//i<=>Inplace edit <file>s, if specified
+
+git commit -am "helloworld modified 4 (Mozilla codestyle)"
+
+git push origin patch2
+
+git checkout master
+
+git merge origin/patch2
+
+>>>CONFLICT (content): Merge conflict in hello_world.cpp<<<
+
+git checkout patch2
+
+git add hello_world.cpp
+
+git rebase --continue
+
+git checkout master
+
+git merge origin/patch2
+
+git push origin patch2 --force
+
+git config pull.rebase false
+
